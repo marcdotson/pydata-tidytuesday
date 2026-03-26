@@ -1,6 +1,6 @@
 ---
-title: "Modeling <br>Conjoint Analysis"
-subtitle: "An Introduction to the Hierarchical Bayesian Multinominal Logit"
+title: "#TidyTuesday #PydyTuesday"
+subtitle: "An Introduction to the Weekly Data Challenge"
 author: "Bowen Hickman and Marc Dotson"
 title-slide-attributes:
   data-background-color: "#0F2439"
@@ -10,7 +10,7 @@ format:
     code-copy: true        # Show code blocks copy button
     slide-number: c/t      # Numbered slides current/total
     embed-resources: true  # Render to a single HTML file
-    footer: "[github.com/marcdotson/pydata-hmnl](https://github.com/marcdotson/pydata-hmnl)"
+    footer: "[github.com/marcdotson/pydata-tidytuesday](https://github.com/marcdotson/pydata-tidytuesday)"
 execute:
   eval: false
   echo: true
@@ -37,374 +37,72 @@ jupyter: python3
 ::::
 ::::::
 
-## {background-color="#288DC2"}
-
-::: {.v-center}
-![](../figures/hackusu-2026.png){fig-align="center" width="80%"}
-:::
-
-# Conjoint {background-color="#288DC2"}
-
-## Predicting new product success
-
-In order to predict new product success, you need to **estimate product demand**
-
-::: {.incremental}
-- New (hypothetical) products **don't exist** and can't be used in a test market
-- We can ask people their preferences, but **stated preferences** are unreliable
-- If people are bad at stating preferences, they're good at **making choices**, so let's us get at their **revealed preferences**
-- If you can estimate product demand as a function of product features and price, you can **design a new product** that you can expect to succeed
-:::
-
-::: {.fragment}
-**Conjoint analysis** is a survey-based experiment for estimating product demand where product features and price are evaluated jointly (i.e., conjointly)
-:::
-
-## {auto-animate=true}
-
-![](../figures/conjoint_earbuds-task.png){fig-align="center"}
-
-## {auto-animate=true}
-
-:::: {.columns .v-center}
-
-::: {.column width="50%"}
-![](../figures/conjoint_earbuds-task.png){fig-align="center"}
-:::
-
-::: {.column width="50%"}
-::: {.incremental}
-- Products are defined by **attributes**, each with a number of **levels**
-- Respondents choose from among product **alternatives**
-- **Respondent-level preferences** are estimated for each attribute level
-- Preference estimates are used to make **counterfactual predictions** in a simulated market
-- **Market simulators** inform new product development, pricing, product line optimization, etc.
-:::
-:::
-
-::::
-
-## 
-
-![](../figures/conjoint_market-simulator.png){fig-align="center"}
-
-# Multilevel Modeling {background-color="#288DC2"}
-
-## 
-
-::: {.v-center}
-$$
-\Large{U_{hj} = \beta_{h1}x_{j1} + \beta_{h2}x_{j2} + \cdots + \beta_{hk}x_{jk} + \epsilon_{hj}}
-$$
-:::
-
-## {visibility="uncounted"}
-
-::: {.v-center}
-$$
-\Large{\color{grey}{U_{hj} = \beta_{h1}\color{black}{x_{j1}} + \beta_{h2}\color{black}{x_{j2}} + \cdots + \beta_{hk}\color{black}{x_{jk}} + \epsilon_{hj}}}
-$$
-:::
-
-## {visibility="uncounted"}
-
-::: {.v-center}
-$$
-\Large{\color{grey}{U_{hj} = \color{black}{\beta_{h1}}x_{j1} + \color{black}{\beta_{h2}}x_{j2} + \cdots + \color{black}{\beta_{hk}}x_{jk} + \epsilon_{hj}}}
-$$
-:::
-
-## {visibility="uncounted"}
-
-::: {.v-center}
-$$
-\Large{\color{grey}{U_{hj} = \color{black}{\beta_{\color{red}{h}1}}x_{j1} + \color{black}{\beta_{\color{red}{h}2}}x_{j2} + \cdots + \color{black}{\beta_{\color{red}{h}k}}x_{jk} + \epsilon_{hj}}}
-$$
-:::
-
-## 
-
-![](../figures/meme_multilevel-names.png){fig-align="center"}
-
-## 
-
-:::: {.columns .v-center .h-center}
-
-::: {.column width="33.33%"}
-**Complete pooling**
-
-Groups have the same parameters from one model
-:::
-
-::: {.fragment fragment-index=3 .column width="33.33%"}
-**Partial pooling**
-
-Each group has their own parameters but they **pool information** in one model
-:::
-
-::: {.fragment fragment-index=2 .column width="33.33%"}
-**No pooling**
-
-Each group has their own parameters from separate models
-:::
-
-::::
-
-# Bayesian Inference {background-color="#288DC2"}
-
 ## 
 
 :::: {.columns .v-center}
 
-::: {.column width="100%"}
-![](../figures/frequentist-panel.png){fig-align="center"}
+::: {.column width="40%"}
+![](../figures/tidytuesday.png){fig-align="center"}
 :::
 
-::::
-
-## 
-
-:::: {.columns .v-center}
-
-::: {.column width="100%"}
-![](../figures/bayesian-triptych.png){fig-align="center"}
-:::
-
-::::
-
-## Comparing frequentist and Bayesian inference
-
-:::: {.columns}
-
-::: {.column width="50%"}
-::: {.fragment}
-### Frequentist
-:::
-
+::: {.column width="60%"}
 ::: {.incremental}
-- **Data** $X, Y$ are random variables
-- Parameter estimates are **point estimates**
-- **Confidence intervals** are a collection of theoretical point estimates
-:::
-:::
-
-::: {.column width="50%"}
-::: {.fragment}
-### Bayesian
-:::
-
-::: {.incremental}
-- **Parameters** $\beta$ are random variables
-- Parameter estimates are **posterior distributions**
-- **Credible intervals** are summaries of posterior distributions
+- Weekly social data project
+- Opportunity to practice, add to portfolios
+- New project provided every week
+- Share with *#TidyTuesday #PydyTuesday*
+- Named after the "tidy" data philosophy
+- Get started at [tidytues.day](https://tidytues.day)
 :::
 :::
 
 ::::
 
-## 
+## Bird sightings at sea
 
-![](../figures/plot_log-price-estimate.png){fig-align="center" width="85%"}
-
-## Logistic regression
-
-$$
-\large{y_{j} \sim \text{Binomial}(1, p_{j})} \\
-\large{\log\left({p_{j} \over 1 - p_{j}}\right) = \beta_{0} + \beta_{1} x_{j1} + \cdots + \beta_{p} x_{jp}}
-$$
-
-::: {.incremental}
-- Logistic regression is a **generalized linear model** (GLM) for binary outcomes
-- Instead of modeling the mean of a normal distribution, we're modeling the probability of getting a 1
-- Every GLM has a **link function** for the linear model, and this is the logit link function
-:::
-
-## Bayesian logistic regression
+This week we're exploring [Bird Sightings at Sea](https://github.com/rfordatascience/tidytuesday/blob/main/data/2026/2026-04-14/readme.md)! The data this week comes from Te Papa Tongarewa, The Museum of New Zealand. It consists of log book entries of bird sightings at sea near New Zealand, from 1969 to 1990.
 
 ```{python}
 #| eval: true
-#| echo: false
+#| code-line-numbers: "|1-2|4-7|9-12"
 
-import numpy as np
 import polars as pl
-import statsmodels.api as sm
-import statsmodels.formula.api as smf
+import seaborn.objects as so
 
-# Set randomization seed
-rng = np.random.default_rng(42)
+beaufort_scale_url = 'https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-04-14/beaufort_scale.csv'
+birds_url = 'https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-04-14/birds.csv'
+sea_states_url = 'https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-04-14/sea_states.csv'
+ships_url = 'https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-04-14/ships.csv'
 
-# Specify a function to simulate data
-def sim_data(n, betas):
-  x1 = rng.normal(10, 3, size=n)
-  x2 = rng.binomial(1, 0.5, size=n)
-  x3 = rng.normal(5, 2, size=n)
-
-  X = np.column_stack([np.ones(n), x1, x2, x3])
-  prob_y = (np.exp(X @ betas) / (1 + np.exp(X @ betas)))
-  y = rng.binomial(1, prob_y, size=n)
-
-  return y, x1, x2, x3
-
-# Simulate data
-data_arr = sim_data(n = 500, betas = np.array([-0.7, -0.3, -0.5, 0.2]))
-conjoint_data = pl.DataFrame(data_arr, schema = ['y', 'x1', 'x2', 'x3']).to_pandas()
+beaufort_scale = pl.read_csv(beaufort_scale_url, null_values = ['NA'])
+birds = pl.read_csv(birds_url, null_values = ['NA'])
+sea_states = pl.read_csv(sea_states_url, null_values = ['NA'])
+ships = pl.read_csv(ships_url, null_values = ['NA'])
 ```
+
+## Bird sightings at sea
 
 ```{python}
 #| eval: true
-#| code-line-numbers: "|1|3-8|5|6|7"
+#| output-location: slide
+#| code-line-numbers: "|2-7|9-11"
 
-import bambi as bmb
-
-# Bayesian logistic regression
-bin_mod = bmb.Model(
-  'y ~ x1 + x2 + x3', 
-  data = conjoint_data,
-  family = 'bernoulli'
+# Which 10 species of bird are observed most often?
+species_count = (birds
+  .group_by(pl.col(['species_common_name']))
+  .agg(n = pl.len())
+  .sort(pl.col('n'), descending = True)
+  .slice(0, 10)
 )
 
-bin_mod
-```
-
-# Multinomial Logit {background-color="#288DC2"}
-
-## Multinomial logit
-
-$$
-\large{y_{j} \sim \text{Multinomial}(n_{jk}, p_{jk})} \\
-\large{\log\left({p_{jk} \over \sum_k p_{jk}}\right) = \beta_{0} + \beta_{1} x_{j1} + \cdots + \beta_{p} x_{jp}}
-$$
-
-::: {.incremental}
-- The multinomial logit is a **generalization of logistic regression**
-- Also referred to as **multinomial logistic regression**, **multiclass logistic regression**, and **categorical regression**
-- The outcome is a **categorical variable** with more than two categories
-:::
-
-## Bayesian multinomial logit
-
-```{python}
-#| eval: true
-#| echo: false
-
-# Specify a function to simulate data
-def sim_data(n, betas):
-  group = rng.integers(0, 5, size=n)
-
-  x1 = rng.normal(10, 3, size=n)
-  x2 = rng.binomial(1, 0.5, size=n)
-  x3 = rng.normal(5, 2, size=n)
-
-  X = np.column_stack([np.ones(n), x1, x2, x3])
-  eta = X @ betas.T
-
-  exp_eta = np.exp(eta)
-  prob_y = exp_eta / exp_eta.sum(axis=1, keepdims=True)
-  y = rng.multinomial(1, prob_y).argmax(axis=1)
-
-  return group, y, x1, x2, x3
-
-# Example: 3 outcome categories
-betas = np.array([
-  [-0.7, -0.3, -0.5,  0.2],
-  [ 0.2,  0.1, -0.2, -0.1],
-  [ 0.0,  0.2,  0.4, -0.3],
-  [-0.5, -0.1, -0.2,  0.3],
-  [ 0.1,  -0.2,  0.2, 0.1],
-])
-
-# Simulate data
-data_arr = sim_data(n = 500, betas = betas)
-conjoint_data = pl.DataFrame(data_arr, schema = ['group', 'y', 'x1', 'x2', 'x3']).to_pandas()
-conjoint_data['y'] = conjoint_data['y'].astype('category')
-```
-
-```{python}
-#| eval: true
-#| code-line-numbers: "|1-6|3|4|5"
-
-# Bayesian multinomial logit
-cat_mod = bmb.Model(
-  'y ~ x1 + x2 + x3', 
-  data = conjoint_data,
-  family = 'categorical'
+(so.Plot(species_count, x = 'n', y = 'species_common_name')
+  .add(so.Bar())
 )
-
-cat_mod
-```
-
-# Hierarchical Multinomial Logit {background-color="#288DC2"}
-
-## Hierarchical multinomial logit
-
-$$
-\large{y_{hj} \sim \text{Multinomial}(n_{jk}, p_{hjk})} \\
-\large{\log\left({p_{hjk} \over \sum_k p_{hjk}}\right) = \beta_{h0} + \beta_{h1} x_{j1} + \cdots + \beta_{hp} x_{jp}}
-$$
-
-::: {.incremental}
-- A **hierarchical model** is a multilevel model where the outcomes are **nested** (e.g., choices nested within respondents)
-- The hierarchical multinomial logit (HMNL) is a **generalization of hierarchical logistic regression**
-- The outcome is a **categorical variable** with more than two categories where there are multiple outcomes per group (e.g., multiple choices per respondent)
-:::
-
-## Bayesian hierarchical multinomial logit
-
-We can have just the intercept parameter vary by group (i.e., **random intercepts**)
-
-```{python}
-#| eval: true
-#| code-line-numbers: "|3"
-
-# Bayesian hierarchical multinomial logit
-hmnl_mod = bmb.Model(
-  'y ~ (1 | group) + x1 + x2 + x3', 
-  data = conjoint_data,
-  family = 'categorical'
-)
-
-hmnl_mod
-```
-
-## Bayesian hierarchical multinomial logit
-
-Or we can have just some slope parameters vary by group (i.e., **random slopes**)
-
-```{python}
-#| eval: true
-#| code-line-numbers: "|3"
-
-# Bayesian hierarchical multinomial logit
-hmnl_mod = bmb.Model(
-  'y ~ x1 + x2 + (x3 | group)', 
-  data = conjoint_data,
-  family = 'categorical'
-)
-
-hmnl_mod
-```
-
-## Bayesian hierarchical multinomial logit
-
-We can have all of our parameters vary by group (i.e., **random effects**)
-
-```{python}
-#| eval: true
-#| code-line-numbers: "|3"
-
-# Bayesian hierarchical multinomial logit
-hmnl_mod = bmb.Model(
-  'y ~ 0 + (x1 + x2 + x3 | group)', 
-  data = conjoint_data,
-  family = 'categorical'
-)
-
-hmnl_mod
 ```
 
 ## {background-color="#288DC2"}
 
 ::: {.v-center}
-![](../figures/pydata-northern-utah_2026-02-26-27.png){fig-align="center" width="80%"}
+![](../figures/pydata-northern-utah_2026-03-26.png){fig-align="center"}
 :::
 
